@@ -1,2 +1,2 @@
-//gsutil -m  cp   ./repo/ellobed*  gs://ellobed/static
+//gsutil -m cp -r ./ellobed/static gs://ellobed/
 console.log("hello world");
