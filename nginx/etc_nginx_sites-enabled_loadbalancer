@@ -2,50 +2,93 @@
 proxy_cache_path /mnt/ramdisk/proxy-cache levels=1:2 keys_zone=proxycache:5m max_size=1000m;
 
 upstream backend {
-  server 127.0.0.1:8080;
+    server 127.0.0.1:8080;
 }
 
 server {
-  listen 80 default;
-  server_name _;
-  location / {
-    set $no_cache "";
-
-    if ($request_method !~ ^(GET|HEAD)$) {
-      set $no_cache "1";
+    listen 443 ssl default;
+    server_name _;
+    ssl_certificate_by_lua_block {
+        auto_ssl:ssl_certificate()
     }
 
-    if ($no_cache = "1") {
-      add_header Set-Cookie "_mcnc=1; Max-Age=2; Path=/";
-      add_header X-Microcachable "0";
+    # You must still define a static ssl_certificate file for nginx to start.
+    #
+    # You may generate a self-signed fallback with:
+    #
+    # openssl req -new -newkey rsa:2048 -days 3650 -nodes -x509 \
+    #   -subj '/CN=sni-support-required-for-valid-ssl' \
+    #   -keyout /etc/ssl/resty-auto-ssl-fallback.key \
+    #   -out /etc/ssl/resty-auto-ssl-fallback.crt
+    ssl_certificate /etc/ssl/resty-auto-ssl-fallback.crt;
+    ssl_certificate_key /etc/ssl/resty-auto-ssl-fallback.key;
+
+    location / {
+        set $no_cache "";
+
+        if ($request_method !~ ^(GET|HEAD)$) {
+            set $no_cache "1";
+        }
+
+        if ($no_cache = "1") {
+            add_header Set-Cookie "_mcnc=1; Max-Age=2; Path=/";
+            add_header X-Microcachable "0";
+        }
+
+        if ($http_cookie ~* "_mcnc") {
+            set $no_cache "1";
+        }
+
+        proxy_no_cache $no_cache;
+        proxy_cache_bypass $no_cache;
+
+        proxy_redirect   http://backend  /;
+        proxy_pass  http://backend;
+        proxy_cache proxycache;
+        proxy_cache_key $scheme$host$request_method$request_uri;
+        proxy_cache_valid 200 60s;
+        proxy_cache_use_stale updating;
+
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+        proxy_max_temp_file_size 1M;
+
+        # Custom logging
+        log_format custom '$remote_addr - $remote_user [$time_local]  '
+        '"$request" $status $body_bytes_sent '
+        '"$http_referer" "$http_user_agent" nocache:$no_cache';
+        access_log  /mnt/logs/microcache.log custom;
+
     }
+}
 
-    if ($http_cookie ~* "_mcnc") {
-      set $no_cache "1";
+# HTTP server
+server {
+    listen 80;
+
+    # Endpoint used for performing domain verification with Let's Encrypt.
+    location /.well-known/acme-challenge/ {
+        content_by_lua_block {
+            auto_ssl:challenge_server()
+        }
     }
+}
 
-    proxy_no_cache $no_cache;
-    proxy_cache_bypass $no_cache;
+# Internal server running on port 8999 for handling certificate tasks.
+server {
+    listen 127.0.0.1:8999;
 
-    proxy_redirect   http://backend  /;
-    proxy_pass  http://backend;
-    proxy_cache proxycache;
-    proxy_cache_key $scheme$host$request_method$request_uri;
-    proxy_cache_valid 200 60s;
-    proxy_cache_use_stale updating;
+    # Increase the body buffer size, to ensure the internal POSTs can always
+    # parse the full POST contents into memory.
+    client_body_buffer_size 128k;
+    client_max_body_size 128k;
 
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-
-    proxy_max_temp_file_size 1M;
-
-    # Custom logging
-    log_format custom '$remote_addr - $remote_user [$time_local]  '
-             '"$request" $status $body_bytes_sent '
-             '"$http_referer" "$http_user_agent" nocache:$no_cache';
-    access_log  /mnt/logs/microcache.log custom;
-
-  }
+    location / {
+        content_by_lua_block {
+            auto_ssl:hook_server()
+        }
+    }
 }
 
