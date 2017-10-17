@@ -8,6 +8,7 @@ upstream backend {
 server {
     listen 443 ssl;
     server_name _;
+    server_tokens off;
     ssl_certificate_by_lua_block {
         auto_ssl:ssl_certificate()
     }
@@ -67,6 +68,7 @@ server {
 # HTTP server
 server {
     listen 80;
+    server_tokens off;
 
     # Endpoint used for performing domain verification with Let's Encrypt.
     location /.well-known/acme-challenge/ {
@@ -79,6 +81,7 @@ server {
 # Internal server running on port 8999 for handling certificate tasks.
 server {
     listen 127.0.0.1:8999;
+    server_tokens off;
 
     # Increase the body buffer size, to ensure the internal POSTs can always
     # parse the full POST contents into memory.
