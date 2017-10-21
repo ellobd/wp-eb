@@ -64,13 +64,14 @@ server {
 server {
     listen 80;
 
+    location /{
+        return 301 https://$host$request_uri;
+    }
+
     # Endpoint used for performing domain verification with Let's Encrypt.
     location /.well-known/acme-challenge/ {
         content_by_lua_block {
             auto_ssl:challenge_server()
-        }
-        location /{
-            return 301 https://$host$request_uri;
         }
     }
 }
