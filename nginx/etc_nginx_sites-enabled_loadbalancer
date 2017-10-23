@@ -42,7 +42,7 @@ server {
         proxy_no_cache $no_cache;
         proxy_cache_bypass $no_cache;
 
-        proxy_redirect   http://backend  /;
+        proxy_redirect   http://backend  $scheme://;
         proxy_pass  http://backend;
         proxy_cache proxycache;
         proxy_cache_key $scheme$host$request_method$request_uri;
@@ -83,7 +83,7 @@ server {
         proxy_no_cache $no_cache;
         proxy_cache_bypass $no_cache;
 
-        proxy_redirect   http://backend  $scheme://;
+        proxy_redirect   http://backend  /;
         proxy_pass  http://backend;
         proxy_cache proxycache;
         proxy_cache_key $scheme$host$request_method$request_uri;
