@@ -42,7 +42,8 @@ server {
         proxy_no_cache $no_cache;
         proxy_cache_bypass $no_cache;
 
-        #proxy_redirect   http://backend  $scheme://$host;
+        #proxy_redirect   http://backend  $scheme://;
+        proxy_redirect off;
         proxy_pass  http://backend;
         proxy_cache proxycache;
         proxy_cache_key $scheme$host$request_method$request_uri;
@@ -52,7 +53,7 @@ server {
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Scheme $scheme;
+        proxy_set_header    X-Scheme $scheme;
 
         proxy_max_temp_file_size 1M;
 
