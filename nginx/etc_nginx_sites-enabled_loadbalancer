@@ -45,9 +45,6 @@ server {
         proxy_redirect   http://backend  $scheme://;
         
         proxy_pass  http://backend;
-        header_filter_by_lua_block {
-            ngx.header["x-powered-by"] = "openresty"
-        }
         proxy_cache proxycache;
         proxy_cache_key $scheme$host$request_method$request_uri;
         proxy_cache_valid 200 60s;
@@ -61,6 +58,9 @@ server {
         proxy_max_temp_file_size 1M;
 
         access_log  /mnt/logs/microcache.log custom;
+        header_filter_by_lua_block {
+            ngx.header["x-powered-by"] = "openresty"
+        }
 
     }
 }
@@ -90,9 +90,6 @@ server {
 
         proxy_redirect   http://backend  /;
         proxy_pass  http://backend;
-        header_filter_by_lua_block {
-            ngx.header["x-powered-by"] = "openresty"
-        }
         proxy_cache proxycache;
         proxy_cache_key $scheme$host$request_method$request_uri;
         proxy_cache_valid 200 60s;
@@ -105,7 +102,10 @@ server {
         proxy_max_temp_file_size 1M;
 
         access_log  /mnt/logs/microcache.log custom;
-
+        header_filter_by_lua_block {
+            ngx.header["x-powered-by"] = "openresty"
+        }
+ 
     }
 
     # Endpoint used for performing domain verification with Let's Encrypt.
