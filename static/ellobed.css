@@ -44,3 +44,7 @@
 #eb_main_footer p{
     margin:2px;
 }
+
+#eb_main_footer .icon-container>i{
+    margin:2%;
+}
