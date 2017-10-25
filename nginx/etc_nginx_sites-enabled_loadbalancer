@@ -7,6 +7,7 @@ upstream backend {
 
 server {
     listen 443 ssl;
+    limit_req zone=one burst=5;
     server_name _;
     ssl_certificate_by_lua_block {
         auto_ssl:ssl_certificate()
@@ -68,7 +69,7 @@ server {
 # HTTP server
 server {
     listen 80;
-
+    limit_req zone=one burst=5;
     location / {
         set $no_cache "";
 
