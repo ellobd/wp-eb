@@ -7,7 +7,7 @@ upstream backend {
 
 server {
     listen 443 ssl;
-    limit_req zone=one burst=5;
+    limit_req zone=one burst=10;
     server_name _;
     ssl_certificate_by_lua_block {
         auto_ssl:ssl_certificate()
