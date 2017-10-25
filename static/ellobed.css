@@ -12,3 +12,35 @@
 .leading{
     color:#08c;
 }
+
+.purple{
+    color:purple
+}
+
+.center{
+    text-align:center;
+}
+
+.orange{
+    color:#e95420;
+}
+
+.blue{
+    color:#08c;
+}
+
+.red{
+    color:red;
+}
+
+.green{
+    color:green;
+}
+
+#eb_main_footer,#eb_main_footer p{
+    font-size:14px;
+}
+
+#eb_main_footer p{
+    margin:2px;
+}
