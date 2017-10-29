@@ -10,7 +10,7 @@ server {
     }
 
     # Path to document root
-    root /var/www
+    root /var/www;
 
     # File to be used as index
     index index.php;
