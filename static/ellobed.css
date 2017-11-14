@@ -37,15 +37,8 @@
     color:green;
 }
 
-#eb_main_footer,#eb_main_footer p{
-    font-size:14px;
-    background-color:whitesmoke;
+.icon-container>i{
+    margin:4%;
+
 }
 
-#eb_main_footer p{
-    margin:2px;
-}
-
-#eb_main_footer .icon-container>i{
-    margin:2%;
-}
