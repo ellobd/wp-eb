@@ -11,6 +11,8 @@
 
 .leading{
     color:#08c;
+    font-size:20px;
+    font-weight:bold;
 }
 
 .purple{
@@ -42,3 +44,10 @@
 
 }
 
+#eb_main_footer{
+    background-color:yellow;
+}
+
+h2.site-description{
+color:white
+}
