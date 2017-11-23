@@ -16,10 +16,13 @@ server {
         auto_ssl:ssl_certificate()
     }
 
-    #importing wp-configuragions
+    #importing wp-configurations
 
     include global/server/ssl.conf;
     include global/server/security.conf;
+
+    ssl_certificate /etc/ssl/resty-auto-ssl-fallback.crt;
+    ssl_certificate_key /etc/ssl/resty-auto-ssl-fallback.key;
 
     
     proxy_read_timeout 720s;
