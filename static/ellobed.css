@@ -1,5 +1,81 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,700,700italic);body,html{height:100%;width:100%;margin:0;padding:0;left:0;top:0;font-size:100%}.center,.container{margin-left:auto;margin-right:auto}*{font-family:Lato,Helvetica,sans-serif;color:#333447;line-height:1.5}h1{font-size:2.5rem}h2{font-size:2rem}h3{font-size:1.375rem}h4{font-size:1.125rem}h5{font-size:1rem}h6{font-size:.875rem}p{font-size:1.125rem;font-weight:200;line-height:1.8}.font-light{font-weight:300}.font-regular{font-weight:400}.font-heavy{font-weight:700}.left{text-align:left}.right{text-align:right}.center{text-align:center}.justify{text-align:justify}.container{width:90%}.row{position:relative;width:100%}.row [class^=col]{float:left;margin:.5rem 2%;min-height:.125rem}.col-1,.col-10,.col-11,.col-12,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9{width:96%}.col-1-sm{width:4.33%}.col-2-sm{width:12.66%}.col-3-sm{width:21%}.col-4-sm{width:29.33%}.col-5-sm{width:37.66%}.col-6-sm{width:46%}.col-7-sm{width:54.33%}.col-8-sm{width:62.66%}.col-9-sm{width:71%}.col-10-sm{width:79.33%}.col-11-sm{width:87.66%}.col-12-sm{width:96%}.row::after{content:"";display:table;clear:both}.hidden-sm{display:none}@media only screen and (min-width:33.75em){.container{width:80%}}@media only screen and (min-width:45em){.col-1{width:4.33%}.col-2{width:12.66%}.col-3{width:21%}.col-4{width:29.33%}.col-5{width:37.66%}.col-6{width:46%}.col-7{width:54.33%}.col-8{width:62.66%}.col-9{width:71%}.col-10{width:79.33%}.col-11{width:87.66%}.col-12{width:96%}.hidden-sm{display:block}}@media only screen and (min-width:60em){.container{width:75%;max-width:60rem}}
 
+
+/* override the default font styles */
+*{
+    color:inherit;
+}
+
+/* FROM CUSTOMIZER */
+
+/*
+You can add your own CSS here.
+
+Click the help icon above to learn more.
+*/
+
+.site,.site-header { 
+max-width:100%;
+}
+.site-header{
+background-color:#08c;
+}
+.primary-navigation li:hover > a, .primary-navigation li.focus > a{
+background-color:#08c
+}
+
+.search-toggle,.search-toggle:hover,.search-toggle.active{
+background-color:#08c
+}
+.search-box{
+background-color:white;
+border:2px solid whitesmoke;
+}
+
+.search-box .search-field {
+width:100%;
+}
+
+.search-box-wrapper{
+    padding:0;
+}
+
+a:active,a:hover,.widget a:hover,.entry-title a:hover,a,.entry-meta a:hover{
+color:#08c;
+}
+
+
+.site-footer{
+background-color:whitesmoke;
+color:black;
+}
+
+.site-footer a,.site-footer a:hover,.widget_calendar caption,.widget-title{
+color:#08c
+}
+
+.widget_calendar tbody a{
+background-color:#08c
+}
+.widget table, .widget th, .widget td{
+border-color:whitesmoke;
+}
+
+
+.site-navigation .current_page_item > a, .site-navigation .current_page_ancestor > a, .site-navigation .current-menu-item > a, .site-navigation .current-menu-ancestor > a {
+color:white
+}
+
+.paging-navigation .page-numbers.current,.paging-navigation a:hover{
+border-color:#08c;
+}
+
+.menu-toggle,.menu-toggle:hover{
+background-color:#08c;
+}
+
+/* USER DEFINED STYLES */
+
 .login h1 a{
     background-image:none,url(https://storage.googleapis.com/ellobed/static/twitter_transparent.png)
 }

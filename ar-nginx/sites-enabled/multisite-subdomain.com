@@ -37,8 +37,8 @@ server {
 
 	# Change socket if using PHP pools or different PHP version
         # fastcgi_pass unix:/run/php/php7.1-fpm.sock;
-        #fastcgi_pass unix:/run/php/php7.0-fpm.sock;
-        fastcgi_pass unix:/var/run/php5-fpm.sock;
+        fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+        #fastcgi_pass unix:/var/run/php5-fpm.sock;
     }
     header_filter_by_lua_block {
         ngx.header["x-powered-by"] = "openresty"
@@ -60,22 +60,6 @@ server {
     location /.well-known/acme-challenge/ {
         content_by_lua_block {
             auto_ssl:challenge_server()
-        }
-    }
-}
-
-# Internal server running on port 8999 for handling certificate tasks.
-server {
-    listen 127.0.0.1:8999;
-
-    # Increase the body buffer size, to ensure the internal POSTs can always
-    # parse the full POST contents into memory.
-    client_body_buffer_size 128k;
-    client_max_body_size 128k;
-
-    location / {
-        content_by_lua_block {
-            auto_ssl:hook_server()
         }
     }
 }
