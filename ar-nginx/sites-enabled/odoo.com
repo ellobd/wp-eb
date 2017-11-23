@@ -11,7 +11,7 @@ server {
     listen [::]:443 ssl;
 
     # Server name to listen for
-    server_name *.erp.*;
+    server_name erp.*;
     ssl_certificate_by_lua_block {
         auto_ssl:ssl_certificate()
     }
@@ -51,7 +51,7 @@ server {
 server {
     listen 80;
     listen [::]:80;
-    server_name *.erp.*;
+    server_name erp.*;
     rewrite ^(.*) https://$host$1 permanent;
     
     location /.well-known/acme-challenge/ {
