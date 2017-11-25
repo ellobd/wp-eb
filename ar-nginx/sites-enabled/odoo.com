@@ -55,6 +55,8 @@ server {
     listen 80;
     listen [::]:80;
     server_name erp.*;
+    include global/server/security.conf;
+
     location /{
         rewrite ^(.*) https://$host$1 permanent;
     }

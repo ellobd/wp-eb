@@ -53,7 +53,7 @@ server {
     listen 80;
     listen [::]:80;
     server_name _;
-
+    include global/server/security.conf;
     location /{
     return 301 https://$host$request_uri;
     }
