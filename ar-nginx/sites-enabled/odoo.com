@@ -55,8 +55,9 @@ server {
     listen 80;
     listen [::]:80;
     server_name erp.*;
-    rewrite ^(.*) https://$host$1 permanent;
-    
+    location /{
+        rewrite ^(.*) https://$host$1 permanent;
+    }
     location /.well-known/acme-challenge/ {
         content_by_lua_block {
             auto_ssl:challenge_server()
