@@ -1,7 +1,7 @@
 jQuery(document).ready(function(){
     var $ = jQuery;
     var url= window.location.href;
-    var page_blocks=["wp-admin"];
+    var page_blocks=["wp-admin","wp-login"];
     var block = function(){
 	for(var i=0;i<page_blocks.length;i++){
 	    if(url.indexOf(page_blocks[i])!==-1){
