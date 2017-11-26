@@ -20,13 +20,13 @@ max-width:100%;
 .site-header{
 background-color:#08c;
 }
+#primary-navigation{
+    font-size:14px;
+}
 .primary-navigation li:hover > a, .primary-navigation li.focus > a{
 background-color:#08c
 }
 
-.search-toggle,.search-toggle:hover,.search-toggle.active{
-background-color:#08c
-}
 .search-box{
 background-color:white;
 border:2px solid whitesmoke;
