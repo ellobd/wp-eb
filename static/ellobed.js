@@ -2,21 +2,14 @@ jQuery(document).ready(function(){
     var $ = jQuery;
     var url= window.location.href;
     var page_blocks=["wp-admin","wp-login"];
-    var block = function(){
-	for(var i=0;i<page_blocks.length;i++){
-	    if(url.indexOf(page_blocks[i])!==-1){
-		return true;
-	    }
-	    else{
-		return false;
-	    }
-
+    var blocked = [];
+    //check if the page is blocked    
+    for(var i=0;i<page_blocks.length;i++){
+	if(url.indexOf(page_blocks[i])!==-1){
+	    blocked.push(true);
 	}
-	
-    };
-    
-    //check if the page is blocked
-    var blocked = page_blocks.filter(block);
+
+    }
     
     if(blocked.length===0){
 	// The page is not blocked
@@ -33,6 +26,6 @@ jQuery(document).ready(function(){
 		  });
 	
     }
-    console.log("hello world");
+
 });
 
