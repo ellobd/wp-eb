@@ -127,3 +127,18 @@ background-color:#08c;
 h2.site-description{
 color:white
 }
+
+.site-content .entry-header,
+.site-content .entry-content,
+.site-content .entry-summary,
+.site-content .entry-meta,
+.page-content {
+margin: 0 auto;
+max-width: 80%;
+}
+
+.site-content .entry-meta {
+background-color: #fff;
+margin-bottom: 8px;
+max-width:100%;
+}
