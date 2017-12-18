@@ -142,3 +142,11 @@ background-color: #fff;
 margin-bottom: 8px;
 max-width:100%;
 }
+
+.site-content .archive-header {
+max-width:80%;
+}
+
+.entry-content li{
+    margin:1%;
+}
