@@ -3,6 +3,8 @@ jQuery(document).ready(function(){
     var url= window.location.href;
     var page_blocks=["wp-admin","wp-login"];
     var blocked = [];
+    var date = new Date();
+    $("#header_date").text(date.toDateString());
     //check if the page is blocked    
     for(var i=0;i<page_blocks.length;i++){
 	if(url.indexOf(page_blocks[i])!==-1){

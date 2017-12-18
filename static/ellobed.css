@@ -107,12 +107,24 @@ background-color:#08c;
     color:#08c;
 }
 
+.blue-top{
+    border-top:5px solid #08c;
+}
+
 .red{
     color:red;
 }
 
+.red-top{
+    border-top:5px solid red;
+}
+
 .green{
     color:green;
+}
+
+.green-top{
+    border-top:5px solid green;
 }
 
 .icon-container>i{
