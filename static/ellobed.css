@@ -23,7 +23,8 @@ Click the help icon above to learn more.
 max-width:100%;
 }
 .site-header{
-background-color:#08c;
+    background-color:#08c;
+    position:relative;
 }
 #primary-navigation{
     font-size:14px;
